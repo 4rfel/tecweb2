@@ -13,12 +13,22 @@ function App() {
     {"type": "Marksman"}]
   // const types = ["Fighter", "Tank", "Mage", "Assassin", "Support", "Marksman"];
 
-  const [type1, setType1] = useState("Escolha uma categoria");
-  const [type2, setType2] = useState("Escolha uma categoria");
+  const [type1, setType1] = useState("Ainda não selecionado");
+  const [type2, setType2] = useState("Ainda não selecionado");
+  const [champ1, setChamp1] = useState("...");
+  const [champ2, setChamp2] = useState("...");
+  const [champ3, setChamp3] = useState("...");
 
+  champs = []
+
+  champsFaceis = []
+
+  champsMedios: []
+
+  champsDificeis: []
 
   lol.getChampions().then(champions => {
-    console.log(champions);
+    this.setState({ champs: champions});
   });
     
   const onType1Select = e => {
@@ -29,7 +39,7 @@ function App() {
   };
   return(
 <div>
-  <h1>oi mayra</h1>
+  <h1>Selecione 2 categorias para escolher o campião perfeito!</h1>
   <select value={type1} onChange={onType1Select}>
       {types.map((obj, index) => {
         return (
@@ -48,7 +58,23 @@ function App() {
       );
     })}
   </select>
+  <div>
+    Primeira categoria:{type1}
+  </div>
+  <div>
+    Segunda categoria:{type2}
+  </div>
+  <div>
+    Campeão de dificuldade mínima: {champ1}
+  </div>
+  <div>
+    Campeão de dificuldade média: {champ2}
+  </div>
+  <div>
+    Campeão de dificuldade máxima: {champ3}
+  </div>
 </div>
   )
-}
+  }
+
 export default App;
