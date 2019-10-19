@@ -30,7 +30,17 @@ app.post('/signup', function (req, res) {
     signup({usuario, senha}, ()=>{});
     return res.json()
 })
-        
+
+app.get('/champs', function (req, res) {
+    const minDificultRange = [0,1,2,3]
+    const mediunDificultRange = [4,5,6,7]
+    const maxDificultRange = [8,9,10]
+    const champs = req.query.champs
+    const type1 = req.query.type1
+    const type2 = req.query.type2
+    res.send({"champIzi":"izi", "champMed":"med", "champHard":"hard"})
+
+})
 
 app.listen(3001, function (){
     console.log('Servidor rodando na porta ...');
