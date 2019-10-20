@@ -6,18 +6,22 @@ import lol from "riot-lol";
 
 
 function App() {
-  const types = [
-    {"type": "Escolha um tipo"},
-    {"type": "Fighter"},
-    {"type": "Tank"},
-    {"type": "Mage"},
-    {"type": "Assassin"},
-    {"type": "Marksman"}]
-  // const types = ["Fighter", "Tank", "Mage", "Assassin", "Support", "Marksman"];
+  const tags = [
+    {"tag": "Escolha um tipo"},
+    {"tag": "Fighter"},
+    {"tag": "Tank"},
+    {"tag": "Mage"},
+    {"tag": "Assassin"},
+    {"tag": "Marksman"}]
+  // const tags = ["Fighter", "Tank", "Mage", "Assassin", "Support", "Marksman"];
 
-  const [type1, setType1] = useState(null);
-  const [type2, setType2] = useState(null);
-  const [champs, setChamps] = useState(null);
+  const [tag1, settag1] = useState(null);
+  const [tag2, settag2] = useState(null);
+  const [champs, setChamps] = useState([
+    {nome: "Aatrox", tag1: "Fighter", tag2: "Tank", dif: 4},
+    {nome: "Ahri", tag1: "Mage", tag2: "Assassin", dif: 5},
+    {nome: "Akali", tag1: "Assassin", tag2: undefined, dif: 7},
+    {nome: "Alistar", tag1: "Tank", tag2: "Support", dif: 7}]);
   // const [champs1, setChamps1] = useState(null);
   // const [champs2, setChamps2] = useState(null);
   const [champ1, setChamp1] = useState(null);
@@ -31,8 +35,8 @@ function App() {
       await api
         .get(`champs`, {
           params: {
-            "type1":type1,
-            "type2":type2,
+            "tag1":tag1,
+            "tag2":tag2,
             "champs": champs
           }
         })
@@ -46,7 +50,7 @@ function App() {
           return e;
         });
     };
-    if(type1!==null && type2!==null && go===true){
+    if(tag1!==null && tag2!==null && go===true){
       getChamps();
       setGo(false)
     }
@@ -70,7 +74,7 @@ function App() {
             info.push(dict);
           }
           setChamps(info)
-          // console.log(info)
+          console.log(info)
         })
         .catch(e => {
           return e;
@@ -81,11 +85,11 @@ function App() {
   }, []);
   
     
-  const onType1Select = e => {
-    setType1(e.target.value);
+  const onTag1Select = e => {
+    settag1(e.target.value);
   };
-  const onType2Select = e => {
-    setType2(e.target.value);
+  const onTag2Select = e => {
+    settag2(e.target.value);
   };
   const onClickGo = e => {
     setGo(true)
@@ -94,33 +98,33 @@ function App() {
   return(
 <div>
   <h1>Selecione 2 categorias para escolher o campião perfeito!</h1>
-  <select onChange={onType1Select}>
-      {types.map((obj, index) => {
+  <select onChange={onTag1Select}>
+      {tags.map((obj, index) => {
         return (
-          <option key={`${index}-${obj.type}`} value={obj.type}>
-            {obj.type}{" "}
+          <option key={`${index}-${obj.tag}`} value={obj.tag}>
+            {obj.tag}{" "}
           </option>
         );
       })}
   </select>
-  <select onChange={onType2Select}>
-    {types.map((obj, index) => {
+  <select onChange={onTag2Select}>
+    {tags.map((obj, index) => {
       return (
-        <option key={`${index}-${obj.type}`} value={obj.type}>
-          {obj.type}{" "}
+        <option key={`${index}-${obj.tag}`} value={obj.tag}>
+          {obj.tag}{" "}
         </option>
       );
     })}
   </select>
   <button onClick={onClickGo}>Click</button>
-  {type1!==null &&
+  {tag1!==null &&
     <div>
-      Primeira categoria: {type1}
+      Primeira categoria: {tag1}
     </div>
   }
-  {type2!==null &&
+  {tag2!==null &&
     <div>
-      Segunda categoria: {type2}
+      Segunda categoria: {tag2}
     </div>
   }
   {champ1!==null &&
