@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import api from "./services/api";
+import api2 from "./services/api2";
 import lol from "riot-lol";
 
 
@@ -17,6 +18,8 @@ function App() {
   const [type1, setType1] = useState(null);
   const [type2, setType2] = useState(null);
   const [champs, setChamps] = useState(null);
+  const [champs1, setChamps1] = useState(null);
+  const [champs2, setChamps2] = useState(null);
   const [champ1, setChamp1] = useState(null);
   const [champ2, setChamp2] = useState(null);
   const [champ3, setChamp3] = useState(null);
@@ -49,10 +52,39 @@ function App() {
     }
   });
 
+
+  
+
   useEffect(() => {
-    lol.getChampions().then(champions => {
-      setChamps(champions)
-    });
+    const getChamps1 = async () => {
+      await api2
+        .get()
+        .then(({ data }) => {
+          //console.log(data.data.Aatrox.info.difficulty)
+          var info = []
+          //estrutura: info = [{nome: nome, tag1: tag1, tag2:tag2, dificuldade:dificuldade}]
+          console.log(data.data)
+          for (var champ in data.data){
+            console.log(champ);
+            var dict = {
+              "nome": champ,
+              "tag1": champ.tags[0],
+              "tag2": champ.tags[1],
+              "dif": champ.info.difficulty
+            };
+            console.log(dict);
+            info.push(dict);
+          }
+
+          return info;     
+        })
+        .catch(e => {
+          return e;
+        });
+    };
+    var info = getChamps1()
+    console.log(info)
+    
   }, []);
   
     
