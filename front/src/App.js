@@ -26,34 +26,11 @@ function App() {
   const [go, setGo] = useState(false);
 
 
-  useEffect(() => {
-    const getChamps = async () => {
-      await api
-        .get(`champs`, {
-          params: {
-            "type1":type1,
-            "type2":type2,
-            "champs": champs
-          }
-        })
-        .then(({ data }) => {
-          setChamp1(data.champIzi);
-          setChamp2(data.champMed);
-          setChamp3(data.champHard);
-          // console.log(data);
-        })
-        .catch(e => {
-          return e;
-        });
-    };
-    if(type1!==null && type2!==null && go===true){
-      getChamps();
-      setGo(false)
-    }
-  });
+  
 
   useEffect(() => {
-    const getChamps1 = async () => {
+    
+    const getChamps = async () => {
       await api2
         .get()
         .then(({ data }) => {
@@ -70,15 +47,20 @@ function App() {
             info.push(dict);
           }
           setChamps(info)
-          // console.log(info)
+          console.log(champs)
         })
         .catch(e => {
           return e;
         });
     };
-    getChamps1()
+    getChamps()
+
     
   }, []);
+
+  //const getListDif = (dif) =>{
+    //for (var champion in )
+  //};
   
     
   const onType1Select = e => {
