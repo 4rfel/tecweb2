@@ -18,8 +18,8 @@ function App() {
   const [type1, setType1] = useState(null);
   const [type2, setType2] = useState(null);
   const [champs, setChamps] = useState(null);
-  const [champs1, setChamps1] = useState(null);
-  const [champs2, setChamps2] = useState(null);
+  // const [champs1, setChamps1] = useState(null);
+  // const [champs2, setChamps2] = useState(null);
   const [champ1, setChamp1] = useState(null);
   const [champ2, setChamp2] = useState(null);
   const [champ3, setChamp3] = useState(null);
@@ -40,7 +40,7 @@ function App() {
           setChamp1(data.champIzi);
           setChamp2(data.champMed);
           setChamp3(data.champHard);
-          console.log(data);
+          // console.log(data);
         })
         .catch(e => {
           return e;
@@ -52,38 +52,31 @@ function App() {
     }
   });
 
-
-  
-
   useEffect(() => {
     const getChamps1 = async () => {
       await api2
         .get()
         .then(({ data }) => {
-          //console.log(data.data.Aatrox.info.difficulty)
+          const aa = data.data
           var info = []
-          //estrutura: info = [{nome: nome, tag1: tag1, tag2:tag2, dificuldade:dificuldade}]
-          console.log(data.data)
-          for (var champ in data.data){
-            console.log(champ);
+          for(var champ in aa){
             var dict = {
-              "nome": champ,
-              "tag1": champ.tags[0],
-              "tag2": champ.tags[1],
-              "dif": champ.info.difficulty
+              "nome": aa[champ].id,
+              "tag1": aa[champ].tags[0],
+              "tag2": aa[champ].tags[1],
+              "dif": aa[champ].info.difficulty
             };
-            console.log(dict);
+            // console.log(dict);
             info.push(dict);
           }
-
-          return info;     
+          setChamps(info)
+          // console.log(info)
         })
         .catch(e => {
           return e;
         });
     };
-    var info = getChamps1()
-    console.log(info)
+    getChamps1()
     
   }, []);
   
@@ -133,10 +126,12 @@ function App() {
   {champ1!==null &&
   <div>
     Campeão de dificuldade mínima: {champ1}
-  </div> &&
+  </div>}
+  {champ2!==null &&
   <div>
     Campeão de dificuldade média: {champ2}
-  </div> &&
+  </div>}
+  {champ3!==null &&
   <div>
     Campeão de dificuldade máxima: {champ3}
   </div>
