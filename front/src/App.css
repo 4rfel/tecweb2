@@ -13,6 +13,13 @@
   padding: 20px;
   color: white;
 }
+body {
+  background-image: url("background2.jpg");
+  background-repeat: repeat-x;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
 
 .App-intro {
   font-size: large;

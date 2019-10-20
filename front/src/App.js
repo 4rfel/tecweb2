@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import api from "./services/api";
 import api2 from "./services/api2";
+import "./App.css";
 import lol from "riot-lol";
+import Container from "react-bootstrap/Container";
+import Row from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
+import ButtonToolbar from 'react-bootstrap/ButtonToolbar';
+
+
 
 
 
@@ -22,8 +29,6 @@ function App() {
     {nome: "Ahri", tag1: "Mage", tag2: "Assassin", dif: 5},
     {nome: "Akali", tag1: "Assassin", tag2: undefined, dif: 7},
     {nome: "Alistar", tag1: "Tank", tag2: "Support", dif: 7}]);
-  // const [champs1, setChamps1] = useState(null);
-  // const [champs2, setChamps2] = useState(null);
   const [champ1, setChamp1] = useState(null);
   const [champ2, setChamp2] = useState(null);
   const [champ3, setChamp3] = useState(null);
@@ -96,9 +101,17 @@ function App() {
   };
 
   return(
+
+
 <div>
-  <h1>Selecione 2 categorias para escolher o campião perfeito!</h1>
-  <select onChange={onTag1Select}>
+<link href='https://fonts.googleapis.com/css?family=Eczar' rel='stylesheet'/>
+<link href='https://fonts.googleapis.com/css?family=Bowlby One SC' rel='stylesheet'/>
+  <p style={{ fontFamily: 'Bowlby One SC', fontSize: 34, color: "#DAA520", textShadow:"-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000, 1px 1px 0 #000"}}>Saudações invocador! </p>
+  <p style={{ fontSize: 18, fontFamily: "Eczar", color:"#ffffff" }}>Deseja aumentar sua champion pool, ou escolher seu champ com base em categorias e dificuldade? Então selecione 2 categorias para escolher o campião perfeito!</p>
+  <Container style={{ fontSize: 14, fontFamily: "Eczar", color:"#ffffff" }}>
+    <Row>
+      Primeira categoria: 
+    <select style={{ fontSize: 12, fontFamily: "Eczar", color:"#ffffff", backgroundColor: "#335264" }} onChange={onTag1Select}>
       {tags.map((obj, index) => {
         return (
           <option key={`${index}-${obj.tag}`} value={obj.tag}>
@@ -106,8 +119,11 @@ function App() {
           </option>
         );
       })}
-  </select>
-  <select onChange={onTag2Select}>
+    </select>
+    </Row>
+    <Row style={{ marginTop:"1%"}}>
+      Segunda categoria:
+    <select style={{ fontSize: 12, fontFamily: "Eczar", color:"#ffffff", backgroundColor: "#335264" }} onChange={onTag2Select}>
     {tags.map((obj, index) => {
       return (
         <option key={`${index}-${obj.tag}`} value={obj.tag}>
@@ -115,31 +131,43 @@ function App() {
         </option>
       );
     })}
-  </select>
-  <button onClick={onClickGo}>Click</button>
-  {tag1!==null &&
-    <div>
-      Primeira categoria: {tag1}
+    </select>
+    <button style={{ fontSize: 12, fontFamily: "Eczar", color:"#ffffff", backgroundColor: "#34576A", marginLeft:"1%" }} onClick={onClickGo}>Procurar</button>
+    </Row>
+  </Container>
+  
+  
+ 
+  <Container>
+    <Row>
+    {tag1!==null && tag2!==null &&
+    <div style={{ fontSize: 18, fontFamily: "Eczar", color:"#DAA520", marginTop:"1%", textShadow:"-0.5px -0.5px 0 #000,0.5px -0.5px 0 #000,-0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000" }}>
+      As categorias selecionadas foram: {tag1}, {tag2}
     </div>
-  }
-  {tag2!==null &&
-    <div>
-      Segunda categoria: {tag2}
+    
+    }
+    </Row>
+    <Row >
+    {champ1!==null &&
+    <div style={{ fontSize: 18, fontFamily: "Eczar", color:"#ffffff" }}> 
+      Campeão de dificuldade mínima: {champ1}
+    </div>}
+    </Row>
+    <Row>
+    {champ2!==null &&
+    <div style={{ fontSize: 18, fontFamily: "Eczar", color:"#ffffff" }}>
+      Campeão de dificuldade média: {champ2}
+    </div>}
+    </Row>
+    <Row>
+    {champ3!==null &&
+    <div style={{ fontSize: 18, fontFamily: "Eczar", color:"#ffffff" }}>
+      Campeão de dificuldade máxima: {champ3}
     </div>
-  }
-  {champ1!==null &&
-  <div>
-    Campeão de dificuldade mínima: {champ1}
-  </div>}
-  {champ2!==null &&
-  <div>
-    Campeão de dificuldade média: {champ2}
-  </div>}
-  {champ3!==null &&
-  <div>
-    Campeão de dificuldade máxima: {champ3}
-  </div>
-  }
+    }
+    </Row>
+  </Container>
+  
 </div>
   )
   }
