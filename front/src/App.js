@@ -55,20 +55,34 @@ function App() {
       setGo(false)
     }
   });
+
+  useEffect(() => {
+    const getChamps1 = async () => {
+      await api2
+        .get()
+        .then(({ data }) => {
+          const aa = data.data
+          var info = []
+          for(var champ in aa){
+            var dict = {
+              "nome": aa[champ].id,
+              "tag1": aa[champ].tags[0],
+              "tag2": aa[champ].tags[1],
+              "dif": aa[champ].info.difficulty
+            };
+            // console.log(dict);
+            info.push(dict);
+          }
+          setChamps(info)
           console.log(info)
         })
         .catch(e => {
           return e;
         });
     };
-    getChamps()
-
+    getChamps1()
     
   }, []);
-
-  //const getListDif = (dif) =>{
-    //for (var champion in )
-  //};
   
     
   const onTag1Select = e => {
