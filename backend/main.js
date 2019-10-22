@@ -6,6 +6,7 @@ const cors = require('cors')
 app.use(Express.json());
 app.use(cors())
 
+
 app.get('/', function (req, res) {
     res.send('Primeira requisição GET');
     });
@@ -31,19 +32,19 @@ app.post('/signup', function (req, res) {
     return res.json()
 })
 
-app.get('/champs', function (req, res) {
+app.post('/champs', function (req, res) {
     const minDificult = 3
     const medDificult = 6
     const maxDificult = 10
-    const champs = req.query.champs
+    const champs = req.body.champs
     const tag1 = req.query.tag1
     const tag2 = req.query.tag2
     
     var possibleChampsIzi = []
     var possibleChampsMed = []
     var possibleChampsHar = []
-    champs.map((obj, index) => {
-        const champ = JSON.parse(obj)
+    
+    champs.map((champ, index) => {
         if(champ.tag2 !== undefined){
             // if(champ.tag1===tag1 || champ.tag1===tag2 || champ.tag2===tag1 || champ.tag2===tag2){
             if(champ.tag1===tag1 || champ.tag1===tag2){
@@ -81,12 +82,13 @@ app.get('/champs', function (req, res) {
     const champMed = possibleChampsMed[0].nome
     const champHar = possibleChampsHar[0].nome
 
-    console.log(champHar)
+    // console.log(champHar)
 
     
     res.send({"champIzi":champIzi, "champMed":champMed, "champHard":champHar})
 
 })
+
 
 app.listen(3001, function (){
     console.log('Servidor rodando na porta ...');

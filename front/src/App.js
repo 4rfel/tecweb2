@@ -38,12 +38,13 @@ function App() {
   useEffect(() => {
     const getChamps = async () => {
       await api
-        .get(`champs`, {
+        .post(`champs`, {
           params: {
             "tag1":tag1,
             "tag2":tag2,
-            "champs": champs
-          }
+          },
+          champs
+          
         })
         .then(({ data }) => {
           setChamp1(data.champIzi);
@@ -107,7 +108,7 @@ function App() {
 <link href='https://fonts.googleapis.com/css?family=Eczar' rel='stylesheet'/>
 <link href='https://fonts.googleapis.com/css?family=Bowlby One SC' rel='stylesheet'/>
   <p style={{ fontFamily: 'Bowlby One SC', fontSize: 34, color: "#DAA520", textShadow:"-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000, 1px 1px 0 #000"}}>Saudações invocador! </p>
-  <p style={{ fontSize: 18, fontFamily: "Eczar", color:"#ffffff" }}>Deseja aumentar sua champion pool, ou escolher seu champ com base em categorias e dificuldade? Então selecione 2 categorias para escolher o campião perfeito!</p>
+  <p style={{ fontSize: 18, fontFamily: "Eczar", color:"#ffffff" }}>Deseja aumentar sua champion pool, ou escolher seu champ com base em categorias e dificuldade? Então selecione 2 categorias para escolher o campeão perfeito!</p>
   <Container style={{ fontSize: 14, fontFamily: "Eczar", color:"#ffffff" }}>
     <Row>
       Primeira categoria: 
