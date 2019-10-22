@@ -72,12 +72,6 @@ app.post('/champs', function (req, res) {
         }
         
     })
-    // console.log("izi")
-    // console.log(possibleChampsIzi)
-    // console.log("med")
-    // console.log(possibleChampsMed)
-    // console.log("hard")
-    // console.log(possibleChampsHar)
     const i1 = Math.floor(Math.random() * possibleChampsIzi.length);
     const i2 = Math.floor(Math.random() * possibleChampsMed.length);
     const i3 = Math.floor(Math.random() * possibleChampsHar.length);
@@ -91,9 +85,6 @@ app.post('/champs', function (req, res) {
     const champIziBlurb = possibleChampsIzi[i1].blurb
     const champMedBlurb = possibleChampsMed[i2].blurb
     const champHarBlurb = possibleChampsHar[i3].blurb
-    
-
-    // console.log(champHar)
 
     
     res.send({"champIzi":champIzi, "champMed":champMed, "champHard":champHar,
