@@ -78,14 +78,27 @@ app.post('/champs', function (req, res) {
     // console.log(possibleChampsMed)
     // console.log("hard")
     // console.log(possibleChampsHar)
-    const champIzi = possibleChampsIzi[0].nome
-    const champMed = possibleChampsMed[0].nome
-    const champHar = possibleChampsHar[0].nome
+    const i1 = Math.floor(Math.random() * possibleChampsIzi.length);
+    const i2 = Math.floor(Math.random() * possibleChampsMed.length);
+    const i3 = Math.floor(Math.random() * possibleChampsHar.length);
+
+    const champIzi = possibleChampsIzi[i1].nome
+    const champMed = possibleChampsMed[i2].nome
+    const champHar = possibleChampsHar[i3].nome
+    const champIziTitle = possibleChampsIzi[i1].title
+    const champMedTitle = possibleChampsMed[i2].title
+    const champHarTitle = possibleChampsHar[i3].title
+    const champIziBlurb = possibleChampsIzi[i1].blurb
+    const champMedBlurb = possibleChampsMed[i2].blurb
+    const champHarBlurb = possibleChampsHar[i3].blurb
+    
 
     // console.log(champHar)
 
     
-    res.send({"champIzi":champIzi, "champMed":champMed, "champHard":champHar})
+    res.send({"champIzi":champIzi, "champMed":champMed, "champHard":champHar,
+     "champIziTitle":champIziTitle, "champMedTitle":champMedTitle, "champHarTitle":champHarTitle,
+     "champIziBlurb":champIziBlurb, "champMedBlurb":champMedBlurb, "champHarBlurb":champHarBlurb})
 
 })
 
