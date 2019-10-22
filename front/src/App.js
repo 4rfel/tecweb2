@@ -62,8 +62,6 @@ function App() {
           setChamp1Blurb(data.champIziBlurb)
           setChamp2Blurb(data.champMedBlurb)
           setChamp3Blurb(data.champHarBlurb)
-          console.log("s")
-          console.log(champ2Blurb)
 
         })
         .catch(e => {
@@ -94,7 +92,6 @@ function App() {
             info.push(dict);
           }
           setChamps(info)
-          // console.log(info)
         })
         .catch(e => {
           return e;
