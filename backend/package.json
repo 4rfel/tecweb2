@@ -4,6 +4,7 @@
   "description": "",
   "main": "main.js",
   "dependencies": {
+    "@google-cloud/translate": "^4.2.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mysql": "^2.17.1",

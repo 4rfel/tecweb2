@@ -7,6 +7,27 @@ app.use(Express.json());
 app.use(cors())
 
 
+async function someFunction() {
+    // Imports the Google Cloud client library
+    const {Translate} = require('@google-cloud/translate');
+
+    // Instantiates a client
+    const translate = new Translate("tecweb2-256818");
+
+    // The text to translate
+    const text = 'Hello, world!';
+
+    // The target language
+    const target = 'fr';
+
+    // Translates some text into French
+    const [translation] = await translate.translate(text, target);
+    console.log(`Text: ${text}`);
+    console.log(`Translation: ${translation}`);
+}
+
+someFunction();
+
 app.get('/', function (req, res) {
     res.send('Primeira requisição GET');
     });

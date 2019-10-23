@@ -4,6 +4,7 @@ import api2 from "./services/api2";
 import "./App.css";
 import Container from "react-bootstrap/Container";
 import Row from 'react-bootstrap/Row';
+import api3 from "./services/api3";
 
 function App() {
   const tags = [
@@ -34,6 +35,7 @@ function App() {
   const [champ3Url, setChamp3Url] = useState("")
   const [champ3Title, setChamp3Title] = useState("")
   const [champ3Blurb, setChamp3Blurb] = useState("")
+  const [horaAntartica, setHoraAntartica] = useState("")
   const [go, setGo] = useState(false);
   const baseImgUrl = "http://ddragon.leagueoflegends.com/cdn/8.24.1/img/champion/"
 
@@ -73,6 +75,25 @@ function App() {
       setGo(false)
     }
   });
+  
+  useEffect(() => {
+    const getTime = async () => {
+      await api3
+      .get()
+      .then(({ data }) => {
+        setHoraAntartica(data.datetime.slice(11,19))
+      })
+      .catch(({ e }) => {
+        console.log(e)
+        return e;
+      });
+    }
+    getTime()
+  });
+  
+  
+  
+  
   useEffect(() => {
     const getChamps1 = async () => {
       await api2
@@ -152,17 +173,20 @@ function App() {
  
   <Container>
     <Row>
-    {tag1!==null && tag2!==null &&
+    {tag1!==undefined && tag2!==undefined &&
     <div style={{ fontSize: 18, fontFamily: "Eczar", color:"#DAA520", marginTop:"1%", textShadow:"-0.5px -0.5px 0 #000,0.5px -0.5px 0 #000,-0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000" }}>
       As categorias selecionadas foram: {tag1}, {tag2}
     </div>
     }
     </Row>
+    <Row style={{ fontFamily: 'Bowlby One SC', fontSize: 20, color: "#DAA520", textShadow:"-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000, 1px 1px 0 #000"}}>
+      Curiosidade! O horário na Antártida agora é {horaAntartica} h
+    </Row>
     <Row >
     {champ1!==null &&
     <div style={{ fontSize: 18, fontFamily: "Eczar", color:"#ffffff" }}> 
       Campeão de dificuldade mínima: {champ1}<br></br>
-      <h2>{champ1Title}</h2>
+      <h2 style={{ fontFamily: 'Bowlby One SC', fontSize: 20, color: "#DAA520", textShadow:"-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000, 1px 1px 0 #000"}}>{champ1Title}</h2>
       <img src={champ1Url} width="100" height="100"></img>
       <p>{champ1Blurb}</p>
       <br></br>
@@ -172,9 +196,9 @@ function App() {
     {champ2!==null &&
     <div style={{ fontSize: 18, fontFamily: "Eczar", color:"#ffffff" }}>
       Campeão de dificuldade média: {champ2}<br></br>
-      <h2 style={{color:"#000000"}}>{champ2Title}</h2>
+      <h2 style={{ fontFamily: 'Bowlby One SC', fontSize: 20, color: "#DAA520", textShadow:"-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000, 1px 1px 0 #000"}}>{champ2Title}</h2>
       <img src={champ2Url} width="100" height="100"></img>
-      <p style={{color:"#000000"}}>{champ2Blurb}</p>
+      <p style={{ fontSize: 18, fontFamily: "Eczar", color:"#ffffff"}}>{champ2Blurb}</p>
       <br></br>
     </div>}
     </Row>
@@ -182,9 +206,9 @@ function App() {
     {champ3!==null &&
     <div style={{ fontSize: 18, fontFamily: "Eczar", color:"#ffffff" }}>
       Campeão de dificuldade máxima: {champ3}<br></br>
-      <h2 style={{color:"#000000"}}>{champ3Title}</h2>
+      <h2 style={{ fontFamily: 'Bowlby One SC', fontSize: 20, color: "#DAA520", textShadow:"-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000, 1px 1px 0 #000"}}>{champ3Title}</h2>
       <img src={champ3Url} width="100" height="100"></img>
-      <p style={{color:"#000000"}}>{champ3Blurb}</p>
+      <p style={{ fontSize: 18, fontFamily: "Eczar", color:"#ffffff"}}>{champ3Blurb}</p>
       <br></br>
     </div>
     }
